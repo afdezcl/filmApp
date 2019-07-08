@@ -16,7 +16,7 @@ export class FilmService {
 
   searchMovies(title: string, type: string){
     this.url = `http://www.omdbapi.com/?s=${encodeURI(title)}&type=${type}&apikey=${this.apiKey}`;
-    //console.log(this.url);
+    console.log(this.url);
     return this.http.get<IFilms>(this.url).pipe(map(results => results['Search']));
   }
 

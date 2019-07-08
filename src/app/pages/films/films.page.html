@@ -5,7 +5,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar [(ngModel)]="title" (ionChange)="searchChanged($event)">
+  <ion-searchbar [(ngModel)]="title" (ionChange)="searchChanged($event)"></ion-searchbar>
+  <ion-item>
+    <ion-label>Select search type</ion-label>
+    <ion-select [(ngModel)]="type" (ionChange)="searchChanged($event)">
+        <ion-select-option selected="true" value="">All</ion-select-option>
+        <ion-select-option value="movie">Movies</ion-select-option>
+        <ion-select-option value="series">Series</ion-select-option>
+        <ion-select-option value="episode">Episodies</ion-select-option>
+    </ion-select>
+  </ion-item>
 
-  </ion-searchbar>
+  <ion-list>
+    <ion-item button *ngFor="let film of (results | async)" [routerLink]="['/', 'film', 'film.imdbID']">
+      <ion-avatar slot="start">
+        <img src="{{film.Poster}}" alt="{{film.Title}}" *ngIf="film.Poster != 'N/A'"/>
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h3>{{film.Title}}</h3>
+        {{film.Year}}
+      </ion-label>
+      <h6><ion-icon slot="end" *ngIf="film.Type === 'movie'" name="videocam"></ion-icon></h6>
+      <h6><ion-icon slot="end" *ngIf="film.Type === 'series'" name="tv"></ion-icon></h6>
+      <h6><ion-icon slot="end" *ngIf="film.Type === 'episode'" name="albums"></ion-icon></h6>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
