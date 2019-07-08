@@ -1,9 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>films</ion-title>
+  <ion-toolbar color='primary'>
+    <ion-title>Film App</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar [(ngModel)]="title" (ionChange)="searchChanged($event)">
 
+  </ion-searchbar>
 </ion-content>
